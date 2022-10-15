@@ -80,7 +80,7 @@ impl<T: Serialize + DeserializeOwned> ContentBox<T> {
     }
 }
 
-fn rand_buf<const SIZE: usize>() -> [u8; SIZE] {
+pub fn rand_buf<const SIZE: usize>() -> [u8; SIZE] {
     let mut nonce = [0u8; SIZE];
     OsRng.fill_bytes(&mut nonce);
     nonce

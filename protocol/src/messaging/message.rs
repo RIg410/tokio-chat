@@ -1,9 +1,6 @@
 use crate::crypto::content_box::ContentBox;
-use crate::messaging::UserId;
 use anyhow::Error;
 use serde::{Deserialize, Serialize};
-use snow::Builder;
-use std::collections::HashMap;
 use x25519_dalek::{PublicKey, StaticSecret};
 
 #[derive(Serialize, Deserialize, Debug)]

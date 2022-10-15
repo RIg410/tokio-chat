@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 pub mod chat;
 pub mod direct;
 pub mod message;
+pub mod notification;
 pub mod transport;
 pub mod user;
 

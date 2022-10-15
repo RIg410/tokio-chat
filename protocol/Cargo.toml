@@ -14,3 +14,5 @@ lazy_static.workspace = true
 curve25519-dalek.workspace = true
 x25519-dalek.workspace = true
 rand_core.workspace = true
+tokio.workspace = true
+itertools.workspace = true
