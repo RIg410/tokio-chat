@@ -49,10 +49,10 @@ pub mod tests {
     use tokio::net::{TcpListener, TcpStream};
     use x25519_dalek::{PublicKey, StaticSecret};
 
-    pub async fn pair_socket() -> (TcpStream, TcpStream) {
-        let server_soc = TcpListener::bind("0.0.0.0:9111").await.unwrap();
+    pub async fn pair_socket(port: u16) -> (TcpStream, TcpStream) {
+        let server_soc = TcpListener::bind(format!("0.0.0.0:{port}")).await.unwrap();
         let server_soc = server_soc.accept();
-        let client_soc = TcpStream::connect("0.0.0.0:9111");
+        let client_soc = TcpStream::connect(format!("0.0.0.0:{port}"));
         let (server, client) = join!(server_soc, client_soc);
         (server.unwrap().0, client.unwrap())
     }
@@ -60,7 +60,7 @@ pub mod tests {
     #[tokio::test]
     async fn test_handshake() {
         let server_key = StaticSecret::from(rand_buf::<32>());
-        let (mut server, mut client) = pair_socket().await;
+        let (mut server, mut client) = pair_socket(9911).await;
 
         let server = super::server_handshake(&mut server, server_key.clone());
         let client = super::client_handshake(&mut client, PublicKey::from(&server_key));
